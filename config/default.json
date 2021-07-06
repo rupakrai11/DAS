@@ -1,0 +1,5 @@
+{
+    "mongoURI":"mongodb+srv://rupak:rupak2055@digital-administration.js0qo.mongodb.net/digitalAD?retryWrites=true&w=majority",
+    "jwtSecret": "secret"
+
+}
