@@ -11,10 +11,13 @@ const User = require("../models/User");
 //@access   Private
 router.get("/", auth, async (req, res) => {
   try {
-    const birthregistration = await BirthRegistration.find({
-      user: req.user.id,
+    await BirthRegistration.find((err, birthregistration) => {
+      if (!birthregistration) {
+        return res.status(404).json({ msg: "Registraion not found" });
+      } else {
+        res.json(birthregistration);
+      }
     }).sort({ date: -1 });
-    res.json(birthregistration);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -55,7 +58,6 @@ router.post(
         religion,
         dob,
         status,
-        user: req.user.id,
       });
 
       const birthregistration = await newBirthRegistration.save();
